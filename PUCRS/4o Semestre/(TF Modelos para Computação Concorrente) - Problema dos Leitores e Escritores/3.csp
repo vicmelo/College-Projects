@@ -1,0 +1,98 @@
+-- Autores:
+-- Victor dos Santos Melo
+-- Vinicius Sesti
+
+WN = 3
+RN = 2
+Max_Sema = 1
+N = WN+RN
+Writers = {0..WN-1}
+Readers = {WN..N-1}
+
+-- N+1 pois este é um valor coringa utilizado pelos escritores na hora de bloquear e desbloquear para escrita
+Procs = {0..N+1}
+
+channel block, unblock:Procs
+channel read_start, read_stop:Readers
+channel write_start, write_stop:Writers
+channel wantWrite:{True,False}
+channel reading:{True,False}
+
+-- Interface entre leitores
+RI(i) = {read_start.i,read_stop.i,wantWrite.true,wantWrite.false,reading.true,reading.false}
+-- Interface de escrita para relação entre processos de escrita
+WI(i) ={block.i,unblock.i,write_start.i,write_stop.i,wantWrite.true, wantWrite.false,reading.true,reading.false}
+	
+SYSW = (|| i : Writers @ [WI(i)] W(i)) [{|block,unblock,write_start,write_stop,wantWrite,reading|}||{|block,unblock|}] SEM(1)
+
+SYSR = (|| i : Readers @ [RI(i)] R(i))
+
+SYS = SYSW [|{|wantWrite,reading.false|}|] SYSR
+
+-- W(i) é o início do processo de um escritor. O processo escolhe entre duas opções:
+-- 1 - Querer escrever, esperar o sinal de que não há ninguém lendo, e então começar a escrever (com WAux(i))
+-- 2 - Não querer escrever e continuar no mesmo estado.
+
+W(i) = wantWrite.true -> reading.false -> WAux(i)
+	   []
+	   wantWrite.false -> W(i)
+
+-- WAux(i) é a parte do processo de um escritor onde este já decidiu que queria escrever, então ele escolhe entre duas opções:
+-- 1 - Realmente escrever, podendo escrever quantas vezes quiser.
+-- 2 - Parar de escrever.
+
+WAux(i) = block.i -> write_start.i -> write_stop.i -> unblock.i -> WAux(i)
+		   []
+		   wantWrite.false -> W(i)
+
+-- R(i) é o início do process de um leitor. O leitor escolhe entre duas opções:
+--	1 - caso nenhum escritor queira escrever (wantWrite.false), então indica que começará a ler (setando reading para true) e começa o processo de leitura (com RAux(i)).
+-- 	2 - caso algum escritor queira escrever, indica que não está lendo (reading.false) e mantém este estado.
+
+R(i) = wantWrite.false -> reading.true -> RAux(i)
+	   []
+	   wantWrite.true -> reading.false -> R(i)
+
+-- RAux(i) é a parte de um processo leitor onde este já setou a flag de que começou a ler para verdadeiro e escolhe entre duas opções:
+-- 1 - começa a ler e então vai para VerifR(i)
+-- 2 - se algum escritor quer escrever (wantWrite.true), seta flag de leitura para falso, sem nem começar a ler, e vai para o estado inicial R(i).
+
+RAux(i) = read_start.i -> VerifR(i)
+	   []
+	   wantWrite.true -> reading.false -> R(i)
+
+-- VerifR(i) é a parte de um processo leitor onde este já começou a ler, porém possui duas escolhas:
+-- 1 - Caso algum escritor queira escrever, termina a leitura, informa que não está lendo (reading.false) e vai para o estado inicial R(i)
+-- 2 - termina sua leitura com read_stop e volta para o estado RAux(i), podendo ler novamente já que nenhum escritor quer escrever.
+
+VerifR(i) = wantWrite.true -> read_stop.i -> reading.false -> R(i)
+			[]
+			read_stop.i -> RAux(i)
+
+-- SEM(s) é o semáforo usado para garantir exclusão mútua entre escritores
+
+SEM(s) = if (s>0 and s<Max_Sema)
+                   then 
+                     (unblock?j:Procs->SEM(s+1)
+                       []block?j:Procs->SEM(s-1))
+                     else if s==0 
+                      then unblock?j:Procs->SEM(s+1)
+                      else block?j:Procs->SEM(s-1)
+
+
+-- Exclusão Mútua para escritores (deve aceitar)
+
+ExMuW = block?i:Writers -> write_start.i -> write_stop.i -> unblock.i -> ExMuW
+
+assert ExMuW [T= SYS\{|read_start,read_stop,wantWrite,reading|}
+
+-- Não bloqueio (deve aceitar)
+
+assert SYS :[deadlock free]
+
+-- Mostra que não há starvation do escritor W(1). Como todos escritores funcionam de mesma forma, não há starvation para qualquer escritor (para mostrar por exaustão, pode substituir W(1) por outro e alterar o assert de acordo) (deve aceitar)
+
+StarvWriters = W(1)
+StarvWriter = W(1)
+
+assert StarvWriters [T= SYS\{|read_start,read_stop,reading.true,block.0,unblock.0,write_start.0,write_stop.0,block.2,unblock.2,write_start.2,write_stop.2|}

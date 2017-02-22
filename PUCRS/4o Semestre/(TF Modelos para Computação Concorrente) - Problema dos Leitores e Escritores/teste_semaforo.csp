@@ -1,0 +1,54 @@
+
+-- Exemplos baseados no livro de Maggee para testar
+-- modelos baseados em sem�oros e produtor-consumidor
+
+
+Max_Sema = 1
+channel ups, downs
+
+
+SIMPLE_SEMA(s) =  (if s>0 
+                      then downs->SIMPLE_SEMA(s-1)
+                      else STOP) [] ups -> SIMPLE_SEMA(s+1)
+                        
+BOUNDED_SIMPLE_SEMA(s) =  if (s>0 and s<Max_Sema)
+                   then 
+                     (ups->BOUNDED_SIMPLE_SEMA(s+1)
+                       []downs->BOUNDED_SIMPLE_SEMA(s-1))
+                     else if s==0 
+                      then ups->BOUNDED_SIMPLE_SEMA(s+1)
+                      else  downs->BOUNDED_SIMPLE_SEMA(s-1)
+                     
+             
+INIT_SEMA= SIMPLE_SEMA(1)
+
+Number_Processes = 3
+nametype Processes = {0..(Number_Processes - 1)}
+channel up,down : Processes
+GEN_SEMA(s) = up?j:Processes->GEN_SEMA(s+1)
+                    [] (if s>0 then down?j:Processes->GEN_SEMA(s-1)
+                              else STOP)
+
+INIT_GEN_SEMA = GEN_SEMA(1)
+
+
+TEST_SEMA(s) = if (s>0 and s<Max_Sema)
+                   then 
+                     (up?j:Processes->TEST_SEMA(s+1)
+                       []down?j:Processes->TEST_SEMA(s-1))
+                     else if s==0 
+                      then up?j:Processes->TEST_SEMA(s+1)
+                      else  down?j:Processes->TEST_SEMA(s-1)
+                
+
+channel critical:Processes
+
+PROC(j)=down.j->critical.j->up.j->PROC(j)
+
+PAR_PROC = ||| i: Processes @ PROC(i)
+
+PROC_INT ={|down,up,critical|}
+SEMA_INT ={|up,down|}
+
+SEMA_MUTEX_DEMO = PAR_PROC [PROC_INT||SEMA_INT] GEN_SEMA(1)
+

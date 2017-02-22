@@ -1,0 +1,87 @@
+-- Autores:
+-- Victor dos Santos Melo
+-- Vinicius Sesti
+
+WN = 2
+RN = 2
+Max_Sema = 1
+N = WN+RN
+Writers = {0..WN-1}
+Readers = {WN..N-1}
+
+-- N+1 pois este é um valor coringa utilizado pelos escritores na hora de bloquear e desbloquear para escrita
+Procs = {0..N+1}
+
+channel block, unblock:Procs
+channel read_start, read_stop:Readers
+channel write_start, write_stop:Writers
+channel buffer:Procs.{true,false}
+
+-- O Buffer funciona como uma espécie de Token Ring.
+
+Buffer(i) =
+				-- se for leitor 
+				if(i >= WN and i < RN+WN) then
+					buffer.i.true -> buffer.i.false -> Proc(i,1)
+					[]
+					buffer.i.false -> Buffer((i+1)%N)
+				
+				-- se for escritor
+				else if (i < WN) then
+
+					buffer.i.true -> buffer.i.false -> Proc(i,0)
+					[]
+					buffer.i.false -> Buffer((i+1)%N)
+				else
+					STOP
+
+
+
+-- Interface entre leitores
+RI(i) = {block.(N+1),unblock.(N+1),read_start.i,read_stop.i}
+-- Interface de escrita para relação entre processos de escrita
+WI(i) ={block.i,unblock.i,write_start.i,write_stop.i}
+
+Proc(i,t) = if(t == 1) then RS(i)
+			else W(i)
+
+
+W(i) = block.i -> write_start.i -> write_stop.i -> unblock.i -> Buffer((i+1)%N)
+
+RS(i) = block.(N+1) -> R(i)
+-- Ele volta para Buffer(0) pois dá prioridade para escritores. Assim, toda vez que um leitor executa, volta a ser verificado se algum escritor quer ser executado
+R(i) = read_start.i -> read_stop.i -> unblock.(N+1) -> Buffer(0)
+
+-- leitores em paralelo
+RDRS = || i: Readers @ [RI(i)] Proc(i,1)
+
+-- escritores em paralelo
+WRTS = || i: Writers @ [WI(i)] Proc(i,0)
+
+SEM(s) = if (s>0 and s<Max_Sema)
+                   then 
+                     (unblock?j:Procs->SEM(s+1)
+                       []block?j:Procs->SEM(s-1))
+                     else if s==0 
+                      then unblock?j:Procs->SEM(s+1)
+                      else block?j:Procs->SEM(s-1)
+
+SYS = Buffer(0)
+
+-- Exclusão Mútua para escritores
+
+ExMuW = block?i:Writers -> write_start.i -> write_stop.i -> unblock.i -> ExMuW
+
+assert ExMuW [T= SYS\{|read_start,read_stop,block.(N+1),unblock.(N+1),buffer|}
+
+-- Não bloqueio
+
+assert SYS :[deadlock free]
+
+-- Falha: mostra que não há starvation de escritores (não tenho certeza se realmente está provando isto)
+
+SW(i) = buffer.i.true -> buffer.i.false -> block.(N+1) -> unblock.(N+1) -> SW(i)
+
+StarvWriters = |||i:Readers@SW(i)
+
+assert SYS\{|read_start,read_stop|} [T= StarvWriters

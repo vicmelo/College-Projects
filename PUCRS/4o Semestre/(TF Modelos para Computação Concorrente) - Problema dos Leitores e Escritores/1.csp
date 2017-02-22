@@ -1,0 +1,76 @@
+-- Autores:
+-- Victor dos Santos Melo
+-- Vinicius Sesti
+
+WN = 2
+RN = 2
+Max_Sema = 1
+N = WN+RN
+Writers = {1..WN}
+Readers = {WN+1..RN+WN}
+Procs = {1..N+1}
+
+channel block, unblock:Procs
+channel read_start, read_stop:Readers
+channel write_start, write_stop:Writers
+
+-- Interface entre leitores
+RI(i) = {block.(N+1),unblock.(N+1),read_start.i,read_stop.i}
+-- Interface de escrita para relação entre processos de escrita
+WI(i) ={block.i,unblock.i,write_start.i,write_stop.i}
+
+Proc(i,t) = if(t == 1) then RS(i)
+			else W(i)
+
+
+W(i) = block.i -> write_start.i -> write_stop.i -> unblock.i -> Proc(i,0)
+
+RS(i) = block.(N+1) -> R(i)
+R(i) = read_start.i -> read_stop.i -> R(i)
+	   []
+	   unblock.(N+1) -> Proc(i,1)
+
+-- leitures em paralelo
+RDRS = || i: Readers @ [RI(i)] Proc(i,1)
+
+-- escritores em paralelo
+WRTS = || i: Writers @ [WI(i)] Proc(i,0)
+
+SEM(s) = if (s>0 and s<Max_Sema)
+                   then 
+                     (unblock?j:Procs->SEM(s+1)
+                       []block?j:Procs->SEM(s-1))
+                     else if s==0 
+                      then unblock?j:Procs->SEM(s+1)
+                      else block?j:Procs->SEM(s-1)
+
+SYS = (WRTS ||| RDRS) [{|block,unblock,write_start,write_stop,read_start,read_stop|}||{|block,unblock|}]  SEM(1)
+
+
+--Asserções
+
+-- Deve aceitar: exclusão mútua de escrita (é sempre verdade os seguintes passos: um processo bloqueia, começa a escrever, termina de escrever e então desbloqueia)
+
+NMEx = block?i:Writers -> write_start.i -> write_stop.i -> unblock.i -> NMEx
+
+assert NMEx [F= SYS\{|block.(N+1),unblock.(N+1),read_stop,read_start|}
+
+-- Mostra que quando um processo entra na sessão crítica, ele sempre sai antes que outra entre
+
+WriteExMutua = block?i:Writers -> write_start.i -> write_stop.i -> unblock.i -> WriteExMutua
+
+assert WriteExMutua [F= SYS\{|block.(N+1),unblock.(N+1),read_stop,read_start|}
+
+-- Mostra que é impossível um processo escrever e outro ler antes que o primeiro saia da seção crítica (e vice-versa)
+
+WRExMutua = block?i:Writers -> write_start.i -> write_stop.i -> unblock.i -> WRExMutua
+			[]
+			block.(N+1) -> unblock.(N+1) -> WRExMutua
+
+assert WRExMutua [F= SYS\{|read_stop,read_start|}
+
+-- Mostra starvation de escritores (é possível que apenas leitores sejam executados)
+
+StarvWriters = block.(N+1) -> unblock.(N+1) -> StarvWriters
+
+assert SYS\{|read_start,read_stop|} [T= StarvWriters
