@@ -1,0 +1,5 @@
+source /soft64/source_gaph
+module load modelsim/10.3a  
+vlib work                   
+vcom my_logic.vhd tb.vhd   
+vsim work.tb 

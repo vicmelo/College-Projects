@@ -1,0 +1,273 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/victor/Aulas/Organização e Arquitetura de Computadores II/T1/Semi-Sincrono
+Ecpu
+Z1 w1472415443
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8CPU.vhd
+Z7 FCPU.vhd
+l0
+L5
+ViAKH^]ZKd:VaTIkcY0m^L0
+!s100 1FSC35]VIL6f;ZhbZOa:F3
+Z8 OV;C;10.4d;61
+32
+Z9 !s110 1472420432
+!i10b 1
+Z10 !s108 1472420432.000000
+Z11 !s90 CPU.vhd|InterfaceSemiSincronaCPU.vhd|InterfaceSemiSincronaPeriferico.vhd|Periferico.vhd|tbSemiSincrono.vhd|
+Z12 !s107 tbSemiSincrono.vhd|Periferico.vhd|InterfaceSemiSincronaPeriferico.vhd|InterfaceSemiSincronaCPU.vhd|CPU.vhd|
+!i113 1
+Z13 tExplicit 1
+Acpu
+R2
+R3
+R4
+R5
+Z14 DEx4 work 3 cpu 0 22 iAKH^]ZKd:VaTIkcY0m^L0
+l29
+L23
+Z15 Vb40d7IITdTI@f2M[6=CY13
+Z16 !s100 USBgJ_Zf=ED6]KlGc=YO>0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Pdefinicoestransmissaoassincrona
+Z17 w1472419480
+R0
+Z18 8InterfaceSemiSincronaCPU.vhd
+Z19 FInterfaceSemiSincronaCPU.vhd
+l0
+L2
+V?T?3@ABV::W^7<kf;^f?A1
+!s100 BbmCU?U`^]AINNAaG]1BP2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Pdefinicoestransmissaosemisincrona
+R4
+R5
+Z20 w1472420275
+R0
+Z21 8InterfaceSemiSincronaPeriferico.vhd
+Z22 FInterfaceSemiSincronaPeriferico.vhd
+l0
+L4
+VHd8_TKJh9@>b_S3WM6M1E3
+!s100 6T7iDa8U[P<VBWKE8]40o3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Einterfacecpu
+R17
+Z23 DPx4 work 31 definicoestransmissaoassincrona 0 22 ?T?3@ABV::W^7<kf;^f?A1
+R4
+R5
+R0
+R18
+R19
+l0
+L11
+VCc7[h?Z58EeIAz3Q^m^>l1
+!s100 zNf@dTUWOE@bOSDf9N_7G0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Ainterfacecpu
+R23
+R4
+R5
+Z24 DEx4 work 12 interfacecpu 0 22 Cc7[h?Z58EeIAz3Q^m^>l1
+l38
+L33
+Z25 V5H:UiGOoidH1a168;[ec11
+Z26 !s100 VXW8zlhnG8bJgDBIdml7S0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Einterfaceperiferico
+R20
+Z27 DPx4 work 33 definicoestransmissaosemisincrona 0 22 Hd8_TKJh9@>b_S3WM6M1E3
+R4
+R5
+R0
+R21
+R22
+l0
+L16
+V@MhTbNlzCf0Z;FLUe`c1h1
+!s100 XzEUMULS36Ehk[ZLWBIlZ2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Ainterfaceperiferico
+R27
+R4
+R5
+Z28 DEx4 work 19 interfaceperiferico 0 22 @MhTbNlzCf0Z;FLUe`c1h1
+l47
+L39
+Z29 VRFmf7G;`zUE8CcXnlZgIc2
+Z30 !s100 F;fHcm5oC9GN`>4:V8f8Y0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Eperiferico
+Z31 w1472420428
+R2
+R3
+R4
+R5
+R0
+Z32 8Periferico.vhd
+Z33 FPeriferico.vhd
+l0
+L5
+VmS[<C4kWYXoPMK1Xc:Q==3
+!s100 ZL0Y_^8fa3WQGc[<_iF[W1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Aperiferico
+R2
+R3
+R4
+R5
+Z34 DEx4 work 10 periferico 0 22 mS[<C4kWYXoPMK1Xc:Q==3
+l23
+L19
+V?o2_R[8e60e<26nn`2j052
+!s100 O:5VWURb0:C]7O^`9LEKJ3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Etbassincrono
+w1472396927
+R4
+R5
+R0
+Z35 8tbSemiSincrono.vhd
+Z36 FtbSemiSincrono.vhd
+l0
+L4
+V@?ag>F0d_3SKjzbkjC^Qk1
+!s100 `aMjZ`Gi0iZ>nofJOB_dJ3
+R8
+32
+!s110 1472396929
+!i10b 1
+!s108 1472396928.000000
+R11
+R12
+!i113 1
+R13
+Etbsemisincrono
+Z37 w1472420291
+R4
+R5
+R0
+R35
+R36
+l0
+L4
+VDdB^`lV^EFhUQ2k@D[fQb1
+!s100 ZKO8G?YKffKXQ5odE@10V0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Atbsemisincrono
+R27
+R28
+R34
+R23
+R24
+R2
+R3
+R14
+R4
+R5
+Z38 DEx4 work 14 tbsemisincrono 0 22 DdB^`lV^EFhUQ2k@D[fQb1
+l32
+L7
+Z39 Vio0DldQi<KeQ<VTEGa4>_1
+Z40 !s100 653D;;FZ<JE]<3K915]j?3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13

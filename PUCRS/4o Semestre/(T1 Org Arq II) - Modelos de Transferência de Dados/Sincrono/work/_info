@@ -1,0 +1,252 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/victor/Aulas/Organização e Arquitetura de Computadores II/T1/Sincrono
+Ecpu
+Z1 w1472394330
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8CPU.vhd
+Z7 FCPU.vhd
+l0
+L5
+VgBj?kl@O38;zR9Y;`Ta`N1
+!s100 jee@fb;b_emOOokP9<5_71
+Z8 OV;C;10.4d;61
+32
+Z9 !s110 1472404021
+!i10b 1
+Z10 !s108 1472404021.000000
+Z11 !s90 CPU.vhd|InterfaceSincronaCPU.vhd|InterfaceSincronaPeriferico.vhd|Periferico.vhd|tbSincrono.vhd|
+Z12 !s107 tbSincrono.vhd|Periferico.vhd|InterfaceSincronaPeriferico.vhd|InterfaceSincronaCPU.vhd|CPU.vhd|
+!i113 1
+Z13 tExplicit 1
+Acpu
+R2
+R3
+R4
+R5
+Z14 DEx4 work 3 cpu 0 22 gBj?kl@O38;zR9Y;`Ta`N1
+l20
+L17
+Z15 V[2]2ob?e<CXh9YUR_UAO^0
+Z16 !s100 <LAgUa@QHSl:S[8LnVI^z1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Einterfacecpu
+Z17 w1472394267
+R4
+R5
+R0
+Z18 8InterfaceSincronaCPU.vhd
+Z19 FInterfaceSincronaCPU.vhd
+l0
+L4
+VniT9_o`]0UbL5Gk5>@b5X2
+!s100 :e0ejlEAacBb?LA<o3kbj0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Ainterfacecpu
+R4
+R5
+Z20 DEx4 work 12 interfacecpu 0 22 niT9_o`]0UbL5Gk5>@b5X2
+l21
+L19
+Z21 VgOZO:[@bQ5B8i2mR<^0;K3
+Z22 !s100 _g_e:80Vf[c:M>o5<zFZj0
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Einterfaceperiferico
+Z23 w1472394297
+R4
+R5
+R0
+Z24 8InterfaceSincronaPeriferico.vhd
+Z25 FInterfaceSincronaPeriferico.vhd
+l0
+L4
+V4R64Qj:4DOFHB6W<QXl4L2
+!s100 8l>hN?l>?C`74?[^60nSn3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Ainterfaceperiferico
+R4
+R5
+Z26 DEx4 work 19 interfaceperiferico 0 22 4R64Qj:4DOFHB6W<QXl4L2
+l21
+L18
+Z27 VO=EiS`SW[XYo;2FVSz_8Q2
+Z28 !s100 CS<cFWV0elZ=6Pc394_f43
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Eperiferico
+Z29 w1472394303
+R2
+R3
+R4
+R5
+R0
+Z30 8Periferico.vhd
+Z31 FPeriferico.vhd
+l0
+L5
+V2[76e?Rm1>Ee^D9iTi6M^0
+!s100 Eo?=G9IGT@ohhVU3jjI9[1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Aperiferico
+R2
+R3
+R4
+R5
+Z32 DEx4 work 10 periferico 0 22 2[76e?Rm1>Ee^D9iTi6M^0
+l19
+L16
+Z33 Vc52?3]4k2L=h`3H`YDF1k2
+Z34 !s100 P08T8IiElX`DkeQ]B24Hm3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Etbassincrono
+Z35 w1472394318
+R4
+R5
+R0
+Z36 8tbSincrono.vhd
+Z37 FtbSincrono.vhd
+l0
+L4
+V@?ag>F0d_3SKjzbkjC^Qk1
+!s100 `aMjZ`Gi0iZ>nofJOB_dJ3
+R8
+32
+Z38 !s110 1472394397
+!i10b 1
+Z39 !s108 1472394397.000000
+Z40 !s90 CPU.vhd|Periferico.vhd|InterfaceSincronaCPU.vhd|InterfaceSincronaPeriferico.vhd|tbSincrono.vhd|
+Z41 !s107 tbSincrono.vhd|InterfaceSincronaPeriferico.vhd|InterfaceSincronaCPU.vhd|Periferico.vhd|CPU.vhd|
+!i113 1
+R13
+Atbassincrono
+R26
+R32
+R20
+R2
+R3
+R14
+R4
+R5
+DEx4 work 12 tbassincrono 0 22 @?ag>F0d_3SKjzbkjC^Qk1
+l25
+L7
+VgQ7d<1lmSC:jC1U_5g[J93
+!s100 T:D>>V>BS9Q^F2Q3]^HYP1
+R8
+32
+R38
+!i10b 1
+R39
+R40
+R41
+!i113 1
+R13
+Etbsincrono
+Z42 w1472394462
+R4
+R5
+R0
+R36
+R37
+l0
+L4
+Vlkd]4bi7gnE146YRa1O811
+!s100 k4:zaSk3jWi2<Chi7?L8:1
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+Atbsincrono
+R26
+R32
+R20
+R2
+R3
+R14
+R4
+R5
+Z43 DEx4 work 10 tbsincrono 0 22 lkd]4bi7gnE146YRa1O811
+l25
+L7
+Z44 VKdZdJT:E^Q2iU4LgajD;H0
+Z45 !s100 ]zH9@NjT4_@k7;k4FUOJi3
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13

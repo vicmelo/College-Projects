@@ -1,0 +1,45 @@
+Correção ADDRESS:
+
+address na verdade é o barramento onde a CPU acessa registradores da memória ou da UART. Quando address é 0xFFE00000, significa que o barramento acessado é da UART. Assim, a UART verifica se address = 0xFFE00000. Então address não é de um bit (como nós haviamos pensado), é de 32 bits realmente, e o valor de um bit é retornado pelo barramento de dados para a CPU, informando se é uma interrupção de leitura ou de escrita.
+
+Necessário fazer:
+
+UART deve verificar se address = 0xFFE00000 e caso seja, retornar via barramento de dados o valor de dadoEnderecoUART (criei esse signal em UART), que é 1 (interrupção de entrada) ou 0 (interrupção de saída). (certeza que é 1 ou 0. Não é 4 ou 0 nem 4 ou 8. Tem um shift left x2 no assembly que transforma 1 em 4 pra fazer operações que precisa).
+
+O valor de dadoEnderecoUART é de acordo com RX ou TX (são estes sinais que indicam se há necessidade de interrupção de saída ou de entrada). Atentem-se à frase abaixo da definição do trabalho:
+
+"Note que devido ao sistema ser full-duplex, a UART deve tratar a possibilidade de requisição de dois pedidos de interrupção simultâneos. Ou seja, dos canais RX e TX. Desta forma, ela deve ter um mecanismo para enfileirar os pedidos de interrupção, de forma a não perder os mesmos"
+
+Deve ser possível enfileirar duas requisições de interrupções.
+
+OBS: UART, enquanto ativada, sempre solicita dado pra CPU para enviar (isto porque, se a CPU não quiser enviar dado, ela desativa a UART pelo barramento CE. Então se a UART está ativada, é porque a CPU quer enviar dado). É assim que a CPU tem controle de quando enviará dados ou não. Pelo que entendi, esse "ativada" refere-se a ativada para envio de dados, pois ainda terá recebimento de dados mesmo se CE estiver desativado.
+
+Possíveis Algoritmos (acho que estão certos, mas dêem uma olhada):
+
+Interrupção de Escrita:
+ 1 - Se CE ativado
+	2 - Se RW enviou valor para RDO ou RW possui valor default que indica que é a primeira vez que executará (nunca transmitiu nada. Nós devemos definir este valor)
+		3 - Se INTR = 1, espera. (pode colocar numa fila*)		
+		4 - UART seta signal dadoEnderecoUART para 0 (envio de dados)
+		5 - UART ativa INTR
+		6 - ENQUANTO INTA = 0, UART espera (só a parte de enviar dado espera. A de receber continua funcionando, pode receber dados normalmente)
+		7 - CPU atende requisição (Seta INTA para 1) e seta barramento address para 0xFFE00000
+		8 - UART desativa INTR.
+		9 - UART verifica que address = 0xFFE00000 e seta data = x"00000000"+dadoEnderecoUART (data é 32 bits, então soma um valor 32 bits vazio com o dadoEnderecoUART)
+		10 - CPU verifica que data = x"00000000" e salta para rotina CPU_TO_UART (essa rotina é um trecho de código assembly que deve ser implementado** [ex na última página do pdf])
+		11 - CPU executa os comandos do trecho CPU_TO_UART
+		12 - Quando comando lido é ERET, CPU seta INTA para 0 e retorna para execução normal (isto já foi feito por mim)
+		13 - Enquanto estiver enviando dados (RDO para outra UART), espera. (para não sobreescrever valor de RDO durante operação de envio de dados)
+		14 - UART "empacota" valor de RW com start bit, bit de paridade e dois stops bits enviando este valor para RDO.
+		15 - Em paralelo:
+			15.1 - UART envia os dados para outra UART. (pelo canal RX)
+			15.2 - Volta para etapa 3.
+
+
+* Como podem haver duas requisições de interrupções simultâneas (leitura e escrita), deve haver uma forma de enfileirar as requisições.
+
+**Reparem que, no trecho assembly, se a rotina será CPU_TO_UART ou UART_TO_CPU dependerá do valor que a UART retorna em data, ou seja, dependerá do valor 0 ou 1 de dadoEnderecoUART. É preciso implementar esse trecho, no exemplo do pdf, só ta mostrando que o contexto deve ser salvo e recuperado, mas a parte interessante (que realiza a operação de envio do dado mesmo) deve ser definida por nós.
+
+
+
+

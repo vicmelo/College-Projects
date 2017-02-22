@@ -1,0 +1,36 @@
+# vsim work.tbSemiSincrono 
+# Start time: 18:40:38 on Aug 28,2016
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.definicoestransmissaoassincrona
+# Loading work.definicoestransmissaosemisincrona
+# Loading work.tbsemisincrono(tbsemisincrono)
+# Loading work.cpu(cpu)
+# Loading work.interfacecpu(interfacecpu)
+# Loading work.periferico(periferico)
+# Loading work.interfaceperiferico(interfaceperiferico)
+add wave -position insertpoint  \
+sim:/tbsemisincrono/clock \
+sim:/tbsemisincrono/resetClock \
+sim:/tbsemisincrono/dadoCPU2Int \
+sim:/tbsemisincrono/dadoInt2CPU \
+sim:/tbsemisincrono/transmitirDadoCPU \
+sim:/tbsemisincrono/prontoParaProximoDadoCPU \
+sim:/tbsemisincrono/dadoRecebidoCPU \
+sim:/tbsemisincrono/dadoPer2Int \
+sim:/tbsemisincrono/dadoInt2Per \
+sim:/tbsemisincrono/transmitirDadoPeriferico \
+sim:/tbsemisincrono/prontoParaProximoDadoPeriferico \
+sim:/tbsemisincrono/dadoRecebidoPeriferico \
+sim:/tbsemisincrono/dadoCPU2Per \
+sim:/tbsemisincrono/dadoPer2CPU \
+sim:/tbsemisincrono/sendCPU \
+sim:/tbsemisincrono/sendPer \
+sim:/tbsemisincrono/ackCPU \
+sim:/tbsemisincrono/ackPer
+run
+# End time: 18:41:29 on Aug 28,2016, Elapsed time: 0:00:51
+# Errors: 0, Warnings: 0

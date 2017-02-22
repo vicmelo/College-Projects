@@ -1,0 +1,30 @@
+# vsim work.tbAssincrono 
+# Start time: 14:05:37 on Aug 28,2016
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.definicoestransmissaoassincronacpu
+# Loading work.definicoestransmissaoassincronaperiferico
+# Loading work.tbassincrono(tbassincrono)
+# Loading work.cpu(cpu)
+# Loading work.interfacecpu(interfacecpu)
+# Loading work.periferico(periferico)
+# Loading work.interfaceperiferico(interfaceperiferico)
+add wave -position insertpoint  \
+sim:/tbassincrono/clockCPU \
+sim:/tbassincrono/resetCPU \
+sim:/tbassincrono/prontoParaProximoDadoCPU \
+sim:/tbassincrono/dadoCPU \
+sim:/tbassincrono/transmitirDadoCPU \
+sim:/tbassincrono/clockPeriferico \
+sim:/tbassincrono/resetPeriferico \
+sim:/tbassincrono/dadoRecebidoPeriferico \
+sim:/tbassincrono/dadoDaInterfacePeriferico \
+sim:/tbassincrono/send \
+sim:/tbassincrono/ack \
+sim:/tbassincrono/dado
+run
+# End time: 14:06:44 on Aug 28,2016, Elapsed time: 0:01:07
+# Errors: 0, Warnings: 0
