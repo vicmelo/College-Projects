@@ -1,0 +1,14 @@
+package Modelo;
+
+public interface IEdge<V, E> {
+	
+	E getLabel();
+	
+	INode<V,E> getOrigin();
+	
+	INode<V,E> getDest();
+
+	int compare(Grafo<V, E>.Edge<V, E> o1, Grafo<V, E>.Edge<V, E> o2);
+	
+
+}

@@ -1,0 +1,11 @@
+package Modelo;
+
+public interface IEdge<V, E> {
+	
+	E getLabel();
+	
+	INode<V,E> getOrigin();
+	
+	INode<V,E> getDest();
+	
+}

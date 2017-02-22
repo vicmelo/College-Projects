@@ -1,0 +1,36 @@
+!SESSION 2016-05-28 18:06:26.799 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /home/victor/Dropbox/PUCRS/3o semestre/Algoritmos e Estruturas de Dados II/Trabalho2 -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.recommenders.types.rcp 1 4 2016-05-28 18:46:35.288
+!MESSAGE Full project indexing required:
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/charsets.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/cldrdata.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/dnsns.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/jaccess.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/jfxrt.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/localedata.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/nashorn.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/sunec.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/sunjce_provider.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/sunpkcs11.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/ext/zipfs.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/jce.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/jfr.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/jsse.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/resources.jar
+  [+] /usr/lib/jvm/jdk1.8.0/jre/lib/rt.jar
+
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.needsRebuild(ProjectTypesIndex.java:167)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.startUp(ProjectTypesIndex.java:122)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Thread.java:745)

@@ -1,0 +1,12 @@
+package Modelo;
+
+public interface IEdge<V, E> implements Comparable<T>{
+	
+	E getLabel();
+	
+	INode<V,E> getOrigin();
+	
+	INode<V,E> getDest();
+	
+
+}

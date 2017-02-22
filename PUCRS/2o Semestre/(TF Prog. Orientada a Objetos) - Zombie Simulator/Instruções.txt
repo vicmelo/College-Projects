@@ -1,0 +1,24 @@
+Para executar, execute o "SimuladorZumbi.jar"
+
+Primeiro:
+
+clicar no botão novo. Selecionar a quantidade de humanos, a porcentagem de humanos amigáveis (que não atacam outros humanos) e 
+a quantidade de zumbis.
+
+Após isso, selecione abaixo do botão "avançar" a quantidade de rodadas para avançar e clique em avançar.
+
+O botão "Reiniciar" irá reiniciar a simulação.
+
+O botão "Salvar" salva a simulação atual em um arquivo padrão chamado "save.txt", onde cada linha refere-se a um personagem.
+
+O botão "Carregar" carrega a simulação salva em "save.txt". Observação: Os sprites (ícones) dos personagens podem mudar, pois
+existem mais de um ícone pra um mesmo tipo de personagem (só para humano comum há uns 6, se bem me lembro). Então ao recarregar, ele pode mudar a imagem do personagem na interface, mas o personagem é o mesmo.
+
+O botão "Contexto" apresenta uma história e explica um pouco o comportamento dos personagens
+
+OBS:
+
+O mapa é separado em tipos de espaços, onde cada cor na interface representa um tipo diferente. Os tipos de espaços são rural, urbano,
+destroços, mercado e celeiro. O tipo assentamento não é utilizado, mas irá servir para uma possível expansão futura que estivemos pensando.
+
+O que varia de um espaço para o outro é a chance do personagem encontrar comida ao mover-se para este espaço.
